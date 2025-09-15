@@ -213,6 +213,217 @@ export const adminStats: AdminStats = {
   ]
 };
 
+// Government monitoring interfaces
+export interface Truck {
+  id: string;
+  driverName: string;
+  vehicleNumber: string;
+  currentLocation: {
+    lat: number;
+    lng: number;
+    address: string;
+  };
+  status: 'active' | 'idle' | 'maintenance' | 'offline';
+  route: string;
+  capacity: number;
+  currentLoad: number;
+  batteryLevel?: number;
+  lastUpdated: string;
+  todayCollections: number;
+  estimatedCompletion: string;
+}
+
+export interface WasteFlow {
+  id: string;
+  stage: 'collection' | 'transport' | 'processing' | 'disposal';
+  location: string;
+  timestamp: string;
+  weight: number;
+  truckId: string;
+  processingPlant?: string;
+  status: 'in-progress' | 'completed' | 'delayed';
+}
+
+export interface RouteOptimization {
+  routeId: string;
+  name: string;
+  totalStops: number;
+  completedStops: number;
+  estimatedTime: string;
+  actualTime: string;
+  efficiency: number;
+  fuelSaved: number;
+  coordinates: { lat: number; lng: number }[];
+}
+
+// Mock government monitoring data
+export const governmentTrucks: Truck[] = [
+  {
+    id: 'truck-001',
+    driverName: 'Raman Kumar',
+    vehicleNumber: 'TN-01-BH-2045',
+    currentLocation: {
+      lat: 13.0827,
+      lng: 80.2707,
+      address: 'Anna Nagar, Chennai'
+    },
+    status: 'active',
+    route: 'Route A - Anna Nagar Circle',
+    capacity: 5000,
+    currentLoad: 3200,
+    batteryLevel: 85,
+    lastUpdated: '2 mins ago',
+    todayCollections: 15,
+    estimatedCompletion: '14:30'
+  },
+  {
+    id: 'truck-002',
+    driverName: 'Suresh Babu',
+    vehicleNumber: 'TN-01-BH-2046',
+    currentLocation: {
+      lat: 13.0878,
+      lng: 80.2785,
+      address: 'T. Nagar, Chennai'
+    },
+    status: 'active',
+    route: 'Route B - T. Nagar Circle',
+    capacity: 5000,
+    currentLoad: 4100,
+    batteryLevel: 72,
+    lastUpdated: '1 min ago',
+    todayCollections: 18,
+    estimatedCompletion: '15:15'
+  },
+  {
+    id: 'truck-003',
+    driverName: 'Muthu Raj',
+    vehicleNumber: 'TN-01-BH-2047',
+    currentLocation: {
+      lat: 13.0067,
+      lng: 80.2206,
+      address: 'Adyar, Chennai'
+    },
+    status: 'idle',
+    route: 'Route C - Adyar Circle',
+    capacity: 5000,
+    currentLoad: 4800,
+    batteryLevel: 45,
+    lastUpdated: '8 mins ago',
+    todayCollections: 22,
+    estimatedCompletion: '16:00'
+  },
+  {
+    id: 'truck-004',
+    driverName: 'Ganesh Iyer',
+    vehicleNumber: 'TN-01-BH-2048',
+    currentLocation: {
+      lat: 12.9716,
+      lng: 80.2341,
+      address: 'Velachery, Chennai'
+    },
+    status: 'maintenance',
+    route: 'Route D - Velachery Circle',
+    capacity: 5000,
+    currentLoad: 0,
+    lastUpdated: '45 mins ago',
+    todayCollections: 0,
+    estimatedCompletion: 'N/A'
+  }
+];
+
+export const wasteFlowData: WasteFlow[] = [
+  {
+    id: 'flow-001',
+    stage: 'collection',
+    location: 'Anna Nagar Ward 12',
+    timestamp: '09:15 AM',
+    weight: 250,
+    truckId: 'truck-001',
+    status: 'completed'
+  },
+  {
+    id: 'flow-002',
+    stage: 'transport',
+    location: 'En route to Kodungaiyur Plant',
+    timestamp: '11:30 AM',
+    weight: 3200,
+    truckId: 'truck-001',
+    processingPlant: 'Kodungaiyur Processing Plant',
+    status: 'in-progress'
+  },
+  {
+    id: 'flow-003',
+    stage: 'processing',
+    location: 'Kodungaiyur Processing Plant',
+    timestamp: '12:45 PM',
+    weight: 2850,
+    truckId: 'truck-002',
+    processingPlant: 'Kodungaiyur Processing Plant',
+    status: 'in-progress'
+  },
+  {
+    id: 'flow-004',
+    stage: 'disposal',
+    location: 'Perungudi Landfill',
+    timestamp: '02:20 PM',
+    weight: 450,
+    truckId: 'truck-002',
+    status: 'completed'
+  }
+];
+
+export const routeOptimizations: RouteOptimization[] = [
+  {
+    routeId: 'route-a',
+    name: 'Anna Nagar Circuit',
+    totalStops: 25,
+    completedStops: 18,
+    estimatedTime: '6h 30m',
+    actualTime: '5h 45m',
+    efficiency: 88,
+    fuelSaved: 12,
+    coordinates: [
+      { lat: 13.0827, lng: 80.2707 },
+      { lat: 13.0850, lng: 80.2720 },
+      { lat: 13.0865, lng: 80.2735 }
+    ]
+  },
+  {
+    routeId: 'route-b',
+    name: 'T. Nagar Circuit',
+    totalStops: 30,
+    completedStops: 22,
+    estimatedTime: '7h 15m',
+    actualTime: '7h 30m',
+    efficiency: 92,
+    fuelSaved: 8,
+    coordinates: [
+      { lat: 13.0878, lng: 80.2785 },
+      { lat: 13.0895, lng: 80.2800 },
+      { lat: 13.0912, lng: 80.2815 }
+    ]
+  }
+];
+
+export const governmentStats = {
+  totalTrucks: 24,
+  activeTrucks: 18,
+  maintenanceTrucks: 3,
+  offlineTrucks: 3,
+  dailyCollections: 156,
+  totalWeight: 45800,
+  routeEfficiency: 89,
+  fuelSavings: 245,
+  citizenReports: 23,
+  resolvedReports: 18,
+  avgResponseTime: '2.3 hours',
+  processingPlants: {
+    kodungaiyur: { capacity: 8000, current: 6200, efficiency: 94 },
+    perungudi: { capacity: 6000, current: 4100, efficiency: 91 },
+    madhavaram: { capacity: 5000, current: 3800, efficiency: 88 }
+  }
+};
+
 // Collection history for current user
 export const userCollections: WasteCollection[] = [
   {

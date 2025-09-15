@@ -12,7 +12,8 @@ import {
   Settings,
   Menu,
   X,
-  Globe
+  Globe,
+  Monitor
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -28,6 +29,7 @@ const Navigation = () => {
     { path: '/training', icon: GraduationCap, label: t('training') },
     { path: '/report', icon: AlertTriangle, label: t('reportWaste') },
     { path: '/collector', icon: Truck, label: t('collector') },
+    { path: '/government', icon: Monitor, label: language === 'en' ? 'Gov Monitor' : 'அரசு கண்காணிப்பு' },
     { path: '/admin', icon: Settings, label: t('admin') },
   ];
 

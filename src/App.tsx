@@ -15,6 +15,7 @@ import ReportWaste from "./pages/ReportWaste";
 import CollectorApp from "./pages/CollectorApp";
 import AdminDashboard from "./pages/AdminDashboard";
 import GovernmentMonitoring from "./pages/GovernmentMonitoring";
+import TruckNavigation from "./pages/TruckNavigation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
                 <Route path="/report" element={<ReportWaste />} />
                 <Route path="/collector" element={<CollectorApp />} />
                 <Route path="/government" element={<GovernmentMonitoring />} />
+                <Route path="/truck-navigation" element={<TruckNavigation />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
